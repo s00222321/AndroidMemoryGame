@@ -6,17 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".GamePage">
 
-    <Button
-        android:id="@+id/button2"
-        android:backgroundTint="@android:color/holo_blue_light"
-    android:clickable="false"
-    android:focusable="false"
-    android:text=""
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:layout_gravity="center"
-    android:gravity="center"
-        android:background="@drawable/circle"
+    <ImageView
+        android:id="@+id/blackCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/countdown"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
 
-    />
+    <ImageView
+        android:id="@+id/yellowCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countdown"
+        app:tint="@color/yellow" />
+
+    <ImageView
+        android:id="@+id/pinkCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/countdown"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/pink" />
+
+    <ImageView
+        android:id="@+id/blueCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/circle"
+        app:layout_constraintBottom_toTopOf="@+id/countdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue" />
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CountDown"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/yellowCircle"
+        app:layout_constraintEnd_toStartOf="@+id/pinkCircle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/blackCircle"
+        app:layout_constraintTop_toBottomOf="@+id/blueCircle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

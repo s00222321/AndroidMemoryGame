@@ -13,6 +13,11 @@
         android:theme="@style/Theme.MemoryGame"
         tools:targetApi="31">
         <activity
+            android:name=".GameOverPage"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+        <activity
             android:name=".GamePage"
             android:configChanges="orientation"
             android:exported="false"

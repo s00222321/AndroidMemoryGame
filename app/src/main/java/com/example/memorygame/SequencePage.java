@@ -19,7 +19,7 @@ public class SequencePage extends AppCompatActivity {
 
     private ImageView blueCircle, yellowCircle, pinkCircle, blackCircle;
     private int countdownValue = 3;
-    private Integer numberPerRound;
+    private Integer numberPerRound, score;
 
     HashMap<Integer, ImageView> circles = new HashMap<>();
 
@@ -34,9 +34,9 @@ public class SequencePage extends AppCompatActivity {
 
         textViewCountdown = findViewById(R.id.countdown);
 
-        if (numberPerRound == null){
-            numberPerRound = 4;
-        }
+        Intent intent = getIntent();
+        numberPerRound = intent.getIntExtra("numberPerRound", 4);
+        score = intent.getIntExtra("numberPerRound", 0);
 
         blackCircle = findViewById(R.id.blackCircle);
         blueCircle = findViewById(R.id.blueCircle);
@@ -124,6 +124,7 @@ public class SequencePage extends AppCompatActivity {
         Intent intent = new Intent(SequencePage.this, GamePage.class);
         intent.putExtra("order", order);
         intent.putExtra("numberPerRound", numberPerRound);
+        intent.putExtra("score", score);
         startActivity(intent);
     }
 }

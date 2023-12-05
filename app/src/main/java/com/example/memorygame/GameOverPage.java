@@ -3,20 +3,25 @@ package com.example.memorygame;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOverPage extends AppCompatActivity {
 
     private Integer score;
-    private TextView scoreDisplay;
+    private TextView scoreDisplay, youScoredText;
     private EditText usernameInput;
     private GameDBHandler dbHandler;
     private Button playButton, highScoresButton;
+    private LinearLayout usernameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,9 @@ public class GameOverPage extends AppCompatActivity {
         playButton = findViewById(R.id.playBtn);
         highScoresButton = findViewById(R.id.highScoreBtn);
 
+        usernameLayout = findViewById(R.id.usernameInputLayout);
+        youScoredText = findViewById(R.id.youScored);
+
         scoreDisplay.setText(String.valueOf(score));
 
         checkAndInsertHighScore();
@@ -44,7 +52,13 @@ public class GameOverPage extends AppCompatActivity {
 
         // if there are less than 5 entries or if it is a high score
         if (highScoreCount < 5 || dbHandler.isHighScore(score)) {
-            promptForUsername();
+            // Delay the promptForUsername method
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    promptForUsername();
+                }
+            }, 2000);
         }
     }
 
@@ -52,7 +66,8 @@ public class GameOverPage extends AppCompatActivity {
         scoreDisplay.setVisibility(View.INVISIBLE);
         playButton.setVisibility(View.INVISIBLE);
         highScoresButton.setVisibility(View.INVISIBLE);
-        usernameInput.setVisibility(View.VISIBLE);
+        youScoredText.setVisibility(View.INVISIBLE);
+        usernameLayout.setVisibility(View.VISIBLE);
     }
 
     public void onSaveScore(View v) {
@@ -63,10 +78,11 @@ public class GameOverPage extends AppCompatActivity {
 
             dbHandler.addHighScore(username, score);
 
-            usernameInput.setVisibility(View.GONE);
+            usernameLayout.setVisibility(View.GONE);
             scoreDisplay.setVisibility(View.VISIBLE);
             playButton.setVisibility(View.VISIBLE);
             highScoresButton.setVisibility(View.VISIBLE);
+            youScoredText.setVisibility(View.VISIBLE);
         }
     }
 

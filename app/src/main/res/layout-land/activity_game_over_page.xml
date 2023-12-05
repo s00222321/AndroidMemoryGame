@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/playBtn" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/youScored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="You scored:"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/youScored" />
 
     <TextView
         android:id="@+id/textView2"
@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:text="Game Over!"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/youScored"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

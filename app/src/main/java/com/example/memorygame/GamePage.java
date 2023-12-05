@@ -22,10 +22,9 @@ public class GamePage extends AppCompatActivity implements SensorEventListener{
     private SensorManager sensorManager;
     private Sensor sensor;
     private Integer[] order;
-    private Integer numberPerRound, score, continueScore;
+    private Integer numberPerRound, score;
     private HashMap<Integer, String> directions = new HashMap<>();
-    private String[] directionsOrder;
-    private String[] userDirectionInput;
+    private String[] directionsOrder, userDirectionInput;
     private int currentIndex = 0;
     private long lastDirectionTimestamp = 0;
     private static final long COOLDOWN_PERIOD = 1000;
@@ -75,65 +74,55 @@ public class GamePage extends AppCompatActivity implements SensorEventListener{
         float y = event.values[1];
         float z = event.values[2];
 
-        // Determine the direction based on accelerometer readings
         String currentDirection = determineDirection(x, y, z);
 
-        // Check if it's a valid direction and there's a cool down period
         if ((currentDirection.equals("up") || currentDirection.equals("down") ||
                 currentDirection.equals("left") || currentDirection.equals("right")) &&
                 (currentTimestamp - lastDirectionTimestamp > COOLDOWN_PERIOD)) {
 
-            textViewCountdown.setText(currentDirection);
-
-            // Store the user's input direction
             userDirectionInput[currentIndex] = currentDirection;
 
-            // Check if the user has completed the entire sequence
             if (currentIndex == numberPerRound - 1) {
-                // User input array is full, compare it to the expected sequence
                 checkUserInput();
             } else {
-                // Update the index to check the next direction
                 currentIndex++;
             }
-
-            // Update the last direction timestamp
             lastDirectionTimestamp = currentTimestamp;
         }
     }
 
     private void checkUserInput() {
-        // Compare the user's input with the expected direction in the sequence
         boolean isCorrect = true;
         for (int i = 0; i < numberPerRound; i++) {
             if (!userDirectionInput[i].equals(directionsOrder[i])) {
-                // If any direction is incorrect, set the flag to false
                 isCorrect = false;
                 break;
             }
         }
 
         if (isCorrect) {
-            // User successfully completed the sequence
+            // if sequence was correct
             Toast.makeText(getApplicationContext(), "Sequence completed!", Toast.LENGTH_SHORT).show();
 
-            continueScore = numberPerRound;
+            score = numberPerRound;
             numberPerRound = numberPerRound + 2;
 
             Intent intent = new Intent(GamePage.this, SequencePage.class);
             intent.putExtra("numberPerRound", numberPerRound);
-            intent.putExtra("score", continueScore);
+            intent.putExtra("score", score);
             startActivity(intent);
+            finish();
         } else {
-            Toast.makeText(getApplicationContext(), "Wrong sequence! Try again.", Toast.LENGTH_SHORT).show();
-
+            // if sequence was incorrect
             Intent intent = new Intent(GamePage.this, GameOverPage.class);
             intent.putExtra("score", score);
             startActivity(intent);
+            finish();
         }
     }
 
     private String determineDirection(float x, float y, float z) {
+        // using values from experimentation
         if (x <= -1.6) {
             return "up";
         } else if (x >= 8.8) {

@@ -5,4 +5,5 @@
     <color name="blue">#35cdff</color>
     <color name="pink">#ff006e</color>
     <color name="yellow">#ffd800</color>
+    <color name="background_colour">#E6E6E6</color>
 </resources>

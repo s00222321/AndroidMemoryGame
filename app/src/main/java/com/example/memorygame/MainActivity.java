@@ -17,5 +17,6 @@ public class MainActivity extends AppCompatActivity {
     public void onPlay(View v){
         Intent intent = new Intent(MainActivity.this, SequencePage.class);
         startActivity(intent);
+        finish();
     }
 }

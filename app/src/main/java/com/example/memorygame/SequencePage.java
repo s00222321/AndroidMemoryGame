@@ -23,8 +23,6 @@ public class SequencePage extends AppCompatActivity {
 
     HashMap<Integer, ImageView> circles = new HashMap<>();
 
-    ArrayList<ImageView> orderOfCircles = new ArrayList<>();
-
     Integer[] order;
 
     @Override
@@ -36,7 +34,7 @@ public class SequencePage extends AppCompatActivity {
 
         Intent intent = getIntent();
         numberPerRound = intent.getIntExtra("numberPerRound", 4);
-        score = intent.getIntExtra("numberPerRound", 0);
+        score = intent.getIntExtra("score", 0);
 
         blackCircle = findViewById(R.id.blackCircle);
         blueCircle = findViewById(R.id.blueCircle);
@@ -63,7 +61,6 @@ public class SequencePage extends AppCompatActivity {
                     startFlashingCombination();
                 } else {
                     countdownValue--;
-
                     handler.postDelayed(this, 1000);
                 }
             }
@@ -126,5 +123,6 @@ public class SequencePage extends AppCompatActivity {
         intent.putExtra("numberPerRound", numberPerRound);
         intent.putExtra("score", score);
         startActivity(intent);
+        finish();
     }
 }
